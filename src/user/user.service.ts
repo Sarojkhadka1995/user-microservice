@@ -11,6 +11,7 @@ import { Model } from 'mongoose';
 
 //INTERFACES
 import { User } from 'src/user/interfaces/user';
+import { signPayload } from 'src/auth/interfaces/signPayload';
 
 //DTO
 import { GetAllUserDto } from './dto/getAllUser.dto';
@@ -20,7 +21,6 @@ import { LoginDTO } from 'src/auth/dto/login.dto';
 
 //THIRD PARTY PACAKGES
 import * as bcrypt from 'bcrypt';
-import { signPayload } from 'src/auth/interfaces/signPayload';
 
 @Injectable()
 export class UserService {
@@ -91,7 +91,7 @@ export class UserService {
     }
   }
 
-  async getUser(userId: any) {
+  async getUser(userId: string) {
     const user = await this.userModel.findOne({ _id: userId });
     if (!user) {
       throw new HttpException('User doesnt exist', HttpStatus.BAD_REQUEST);
